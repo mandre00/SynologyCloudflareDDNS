@@ -86,9 +86,7 @@ if [[ $ipv4 = "true" ]]; then
 	if [[ ! $ipAddr =~ $ipv4Regex ]]; then
 		ipv4="false";		# IPV4 is invalid
 	fi
-fi
 
-if [[ $ipv4 = "true" ]]; then
 	res=$(curl -s -X GET "$listDnsApi" -H "Authorization: Bearer $password" -H "Content-Type:application/json")
 	resSuccess=$(echo "$res" | jq -r ".success")
 	if [[ $resSuccess != "true" ]]; then
