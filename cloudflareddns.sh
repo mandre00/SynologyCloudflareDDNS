@@ -75,9 +75,17 @@ if [[ $ipv6 = "true" ]]; then
 	fi
 fi
 
-# test if ipv4 is valid
-if [[ ! $ipAddr =~ $ipv4Regex ]]; then
-	ipv4="false";		# IPV4 is invalid
+if [[ $ipv4 = "true" ]]; then
+	
+	#test if a ipv4 was provided
+	if [[ ! $variable ]]; then
+		ipAddr=$(ddnsd -e |cut -d "=" -f2 | tr -d " ")
+	fi
+
+	# test if ipv4 is valid
+	if [[ ! $ipAddr =~ $ipv4Regex ]]; then
+		ipv4="false";		# IPV4 is invalid
+	fi
 fi
 
 if [[ $ipv4 = "true" ]]; then
