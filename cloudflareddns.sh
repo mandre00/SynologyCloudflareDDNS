@@ -67,7 +67,7 @@ listDnsv6Api="https://api.cloudflare.com/client/v4/zones/${username}/dns_records
 
 #Fetch and filter IPv6, if Synology won't provide it, ignore localhost and local addresses
 if [[ $ipv6 = "true" ]]; then
-	ip6fetch=$(/sbin/ip -6 addr show ${INTERFACE} | grep -oP "$ipv6Regex" | egrep -v "(^::1)|(^fe80)|(^fd00)")
+	ip6fetch=$(/sbin/ip -6 addr show ${INTERFACE} | grep -oP "$ipv6Regex" | egrep -v "(^::1)|(^fe80)|(^fd00)" || true)
 	ip6Addr=$(if [ -z "$ip6fetch" ]; then echo ""; else echo "${ip6fetch:0:$((${#ip6fetch}))}"; fi) # in case of NULL, echo NULL
 
 	if [[ -z "$ip6Addr" ]]; then
